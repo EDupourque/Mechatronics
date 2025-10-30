@@ -22,7 +22,7 @@ def adjust_accel(accel_x: float, accel_y: float, acel_z: float, yw: float, ptch:
         Sy = np.sin(p)
         Sz = np.sin(y)
         
-        R = np.array([[Cz * Cy, Cz*Sy*Sx - Sz * Cx, Cz*Sy*Cx + Sz*Sx],  #rotates from body to earth frame
+        R = np.array([[Cz * Cy, Cz*Sy*Sx - Sz * Cx, Cz*Sy*Cx + Sz*Sx],  #represent body orientation relative to earth
                     [Sz * Cy, Sz*Sy*Sx + Cz * Cx, Sz*Sy*Cx - Cz*Sx], 
                     [-Sy,       Cy * Sx,              Cy*Cx]])
 
