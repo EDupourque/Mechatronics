@@ -22,20 +22,31 @@ def adjust_accel(accel_x: float, accel_y: float, acel_z: float, yw: float, ptch:
         Sy = np.sin(p)
         Sz = np.sin(y)
         
-        R = np.array([[Cz * Cy, Cz*Sy*Sx - Sz * Cx, Cz*Sy*Cx + Sz*Sx],  #represent body orientation relative to earth
-                    [Sz * Cy, Sz*Sy*Sx + Cz * Cx, Sz*Sy*Cx - Cz*Sx], 
-                    [-Sy,       Cy * Sx,              Cy*Cx]])
+        #represent body orientation relative to earth
+        #Rotation order is yaw, pitch, and then roll
+
+        R = np.array([[Cz * Cy, Cz*Sy*Sx - Sz * Cx, Cz*Sy*Cx + Sz*Sx],  #represent body orientation relative to earth (fixed frame)
+                     [Sz * Cy, Sz*Sy*Sx + Cz * Cx, Sz*Sy*Cx - Cz*Sx], 
+                     [-Sy,       Cy * Sx,              Cy*Cx]])
+
 
         g_vector = np.array([[0.0], [0.0], [9.80665]]) #positive G because NED convention
+
+        #test_g = R @ g_vector 
 
         a_earth =  R @ a_vector #accleration due to gravity  along xyz
 
         adjusted = a_earth - g_vector #remove gravity from acceleration for linear ax,ay,az
 
+        #a_vector = a_vector - test_g
 
-        ax = float(adjusted[0]) 
-        ay = float(adjusted[1]) 
-        az = float(adjusted[2]) 
+        #adjusted = R.T @ a_vector
+
+        ax = float(adjusted[0])
+        ay = float(adjusted[1])
+        az = float(adjusted[2])
+
+ 
 
         return (ax, ay, az)
 
