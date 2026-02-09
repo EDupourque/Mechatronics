@@ -77,6 +77,7 @@ class Prequal_FSM(FSM_Template):
 					self.shared_memory_object.target_x.value = self.x1
                 	self.shared_memory_object.target_y.value = self.y1
 					self.shared_memory_object.target_z.value = self.gate_z
+					
 				case States.FIRST_EDGE: #set target values to first edge of route xy
 					self.shared_memory_object.target_x.value = self.x2
 					self.shared_memory_object.target_y.value = self.y2
